@@ -1306,4 +1306,3 @@ class future(Scene):
         self.wait(5)
         self.play(FadeOut(text10), run_time=4)
         self.wait(25)
-        

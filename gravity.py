@@ -324,6 +324,7 @@ class problem(Scene):
 
         image1 = ImageMobject("blackhole")
         image1.move_to(DOWN)
+        image1.scale(2.5)
 
         text3 = TextMobject("Přesně se neví, zdali je to pravda,\\\\ale nejspíše neplatí u předmětu denního života.")
         text3.move_to(UP)
@@ -332,21 +333,22 @@ class problem(Scene):
         text4.move_to(1.5*DOWN)
 
         text5 = TextMobject("Rovnice vysvětluje objekty\\\\ podobné ve sluneční soustavě.")
-        text5.move_to(UP)
+        text5.to_edge(UP)
 
         image2 = ImageMobject("solar.system")
-        image2.move_to(DOWN)
+        image2.scale(2.5)
+        image2.move_to(0.5*DOWN)
 
         text6 = TextMobject("Co je ale gravitace za sílu?\\\\Odkud se ta síla bere?")
         text6.move_to(UP)
 
-        image3 = ImageMobject("newton")
-        image3.move_to(DOWN)
-
-        image4 = ImageMobject("thinking.hand")
-        image4.move_to(2*DOWN)
+        image4 = ImageMobject("thinking.newton")
+        image4.move_to(1*DOWN)
+        
+        
 
         image5 = ImageMobject("einstein")
+        image5.scale(2)
 
 
 
@@ -359,14 +361,90 @@ class problem(Scene):
         self.wait(3)
         self.play(FadeIn(image1))
         self.wait(2)
-        self.play(FadeOut(image1), FadeOut(text1), Write(text3), Write(text4))
+        self.play(FadeOut(image1), FadeOut(text1), Write(text3))
+        self.play(Write(text4))
         self.wait(3)
         self.play(FadeOut(text3), FadeOut(text4), Write(text5), FadeIn(image2))
         self.wait(3)
         self.play(FadeOut(text5), FadeOut(image2))
-        self.play(FadeIn(image3), Write(text6), FadeIn(image4))
+        self.play(Write(text6), FadeIn(image4))
         self.wait()
-        self.play(FadeOut(image3), FadeOut(image4), FadeOut(text6))
+        self.play(FadeOut(image4), FadeOut(text6))
         self.wait()
         self.play(FadeIn(image5))
-        self.wait(5)
+        self.wait(5) 
+        self.play(FadeOut(image5))
+        self.wait(2)
+
+class einstein01(Scene):
+	def construct(self):
+		image1 = ImageMobject("spacetimecurvature")
+
+		image2 = ImageMobject("curvature02")
+		image2.scale(2)
+
+		image3 = ImageMobject("stickman")
+		image3.move_to(1.6*UP+2*RIGHT)
+		image3.scale(0.65)
+
+		START1 = (2*UP+3*RIGHT)
+		END1 = (2*UP+7*RIGHT)
+
+		END2 = (8*DOWN+3*RIGHT)
+		
+		END3 = (8*DOWN+7*RIGHT)
+
+		line1 = Line(START1, END1)
+		line2 = Line(START1, END2)
+		line3 = Line(END1, END3)
+		
+		square1 = Square()
+		square1.scale(0.4)
+		square1.move_to([4.33,1,0])
+
+		square2 = Square()
+		square2.scale(0.4)
+		square2.move_to([5.66,1,0])
+
+		square3 = Square()
+		square3.scale(0.4)
+		square3.move_to([4.33,-0.5,0])
+
+		square4 = Square()
+		square4.scale(0.4)
+		square4.move_to([5.66,-0.5,0])
+
+		square5 = Square()
+		square5.scale(0.4)
+		square5.move_to([4.33,-2,0])
+
+		square6 = Square()
+		square6.scale(0.4)
+		square6.move_to([5.66,-2,0])
+
+		START2 = (1*UP+3*RIGHT)
+		END4 = (1*UP+1.5*RIGHT)
+
+		line4 = Line(START2, END4)
+
+		
+		
+
+
+		self.play(FadeIn(image3), FadeIn(square1), FadeIn(line1), FadeIn(line2), FadeIn(line3), FadeIn(square2), FadeIn(square3),
+				FadeIn(square4), FadeIn(square5), FadeIn(square6), FadeIn(line4)	
+				)
+		self.wait(10)
+		self.play(image3.rotate, 45*DEGREES, 
+					image3.move_to,1.6*UP+0.8*RIGHT, run_time=2 )
+		self.play(image3.rotate, 40*DEGREES, image3.move_to, 0.8*RIGHT+1.1*UP)
+		self.play(image3.move_to, 8*DOWN+0.8*RIGHT, rate_func=rush_into, run_time=3)
+        self.play(image3.rotate,275*DEGREES)
+        self.play(image3.move_to, 2*UP+0.8*RIGHT, rate_func=rush_into, run_time=3)
+		self.wait(10)
+		self.play(FadeIn(image1))
+		self.wait(5)
+		self.play(FadeOut(image1))
+		self.wait()
+		self.play(FadeIn(image2))
+		self.wait(10)

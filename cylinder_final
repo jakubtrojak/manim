@@ -1,0 +1,33 @@
+from manimlib.imports import *
+
+
+class SurfacesAnimation(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        cylinder = ParametricSurface(
+            lambda u, v: np.array([
+                np.cos(TAU * v),
+                np.sin(TAU * v),
+                2 * (1 - u)
+            ]),
+            resolution=(6, 32)).fade(0.5) #Resolution of the surfaces
+
+        unwrappedcylinder = ParametricSurface(
+            lambda u, v: np.array([
+                v - PI,
+                +1,
+                np.cos(u)
+            ]), resolution=(6,32)).scale(4)
+        unwrappedcylinder.move_to([0,0,1])
+
+        rectangle = Rectangle()
+        rectangle.rotate(PI/2,axis=RIGHT)
+        rectangle.move_to([0,0,1])
+
+        self.set_camera_orientation(phi=75 * DEGREES)
+        self.begin_ambient_camera_rotation(rate=0.05)
+
+        self.add(axes)
+        self.play(Write(cylinder))
+        self.play(ReplacementTransform(cylinder, unwrappedcylinder), run_time=5)
+        self.wait(2)

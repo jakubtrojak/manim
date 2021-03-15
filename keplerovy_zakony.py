@@ -16,6 +16,9 @@ class uvod(Scene):
                                 "1571-1630")
         text2.move_to(3*DOWN)
 
+        image2 = ImageMobject("astronomia_nova")
+        image2.scale(3)
+
 
         self.play(Write(text1))
         self.wait(3)
@@ -26,6 +29,10 @@ class uvod(Scene):
         self.play(Write(text2))
         self.wait(3)
         self.play(FadeOut(text2), FadeOut(image1))
+        self.wait(2)
+        self.play(FadeIn(image2))
+        self.wait(2)
+        self.play(FadeOut(image2))
         self.wait(2)
 
 class elipsa(Scene):
@@ -56,9 +63,13 @@ class elipsa(Scene):
         image22.scale(0.7)
         image22.fade(0.6)
 
+        text10 = TextMobject("1. zákon")
+        text10.scale(3)
+
         text1 = TextMobject("Planety obíhají kolem Slunce\\\\"
                              "po eliptických drahách (přesněji trajektoriích),\\\\"
                              "v jejichž jednom společném ohnisku je Slunce.")
+        text1.scale(1.2)
 
         arrow1 = Arrow(color=GREEN)
         arrow1.rotate(315*DEGREES)
@@ -78,8 +89,9 @@ class elipsa(Scene):
         dot1.move_to(1.8*RIGHT)
 
         arrow3 = Arrow(color=GREEN)
-        arrow3.rotate(225*DEGREES)
-        arrow3.move_to(4.6*RIGHT+2*UP)
+        arrow3.rotate(250*DEGREES)
+        arrow3.move_to(4.3*RIGHT+1*UP)
+        arrow3.scale(0.85)
 
         text5 = TextMobject("Planeta\\\\"
                             "(Země)")
@@ -89,11 +101,13 @@ class elipsa(Scene):
         text6.move_to(2.5*UP)
         text6.scale(1.5)
 
-        text7 = TextMobject("Přísluní")
+        text7 = TextMobject("Přísluní\\\\"
+                            "Perihélium")
         text7.move_to(5.5*LEFT)
 
 
-        text8 = TextMobject("Odsluní")
+        text8 = TextMobject("Odsluní\\\\"
+                            "Afélium")
         text8.move_to(5.5*RIGHT)
 
         image3 = ImageMobject("blue.circle")
@@ -105,9 +119,11 @@ class elipsa(Scene):
         self.play(FadeIn(image11), FadeIn(image21))
         self.wait(3)
         self.play(FadeOut(image11), FadeOut(image21), FadeOut(ellipse1), FadeIn(image12), FadeIn(image22), FadeIn(ellipse2))
-        self.play(Write(text1))
+        self.play(Write(text10))
         self.wait(3)
-        self.play(FadeOut(text1), FadeOut(image12), FadeOut(image22), FadeOut(ellipse2), FadeIn(ellipse1), FadeIn(image11), FadeIn(image21))
+        self.play(Transform(text10, text1))
+        self.wait(5)
+        self.play(FadeOut(text10), FadeOut(image12), FadeOut(image22), FadeOut(ellipse2), FadeIn(ellipse1), FadeIn(image11), FadeIn(image21))
         self.wait(3)
         self.play(GrowArrow(arrow1), GrowArrow(arrow2), Write(text3), Write(text4), FadeIn(dot1))
         self.wait(3)
@@ -131,9 +147,15 @@ class elipsa(Scene):
 
 class rychlost(GraphScene):
     def construct(self):
+
+        text10 = TextMobject("2. zákon")
+        text10.scale(3)
+
         text1 = TextMobject("Obsahy ploch opsaných průvodičem planety\\\\"
                                 "(spojnice planety a Slunce) za stejný\\\\"
                                     "čas jsou stejně velké.")
+        text1.scale(1.2)
+
         ellipse1 = Ellipse()
         ellipse1.scale(4)
 
@@ -190,9 +212,11 @@ class rychlost(GraphScene):
         text6.scale(1.5)
 
         self.wait()
-        self.play(Write(text1))
+        self.play(Write(text10))
         self.wait(3)
-        self.play(FadeOut(text1))
+        self.play(Transform(text10, text1))
+        self.wait(5)
+        self.play(FadeOut(text10))
         self.wait()
         self.play(FadeIn(ellipse1), FadeIn(image1), FadeIn(image2))
         self.play(MoveAlongPath(image1, ellipse1), rate_func=smooth, run_time=15)
@@ -254,9 +278,14 @@ class rychlost(GraphScene):
 
 class rovnost(Scene):
     def construct(self):
+
+        text10 = TextMobject("3. zákon")
+        text10.scale(3)
+
         text1 = TextMobject("Poměr druhých mocnin oběžných\\\\"
                             "dob dvou planet je stejný jako poměr \\\\"
                             "třetích mocnin délek jejich hlavních poloos.")
+        text1.scale(1.2)                    
         
         tex1 = TexMobject(r"\frac{T^{2}}{a^{3}}")
         tex1.scale(2.8)
@@ -313,23 +342,27 @@ class rovnost(Scene):
         image4.scale(1.3)
         image4.move_to(5.7*RIGHT)
 
-        self.play(Write(text1))
-        self.wait(5)
-        self.play(Transform(text1, tex1))
-        self.wait(3)
-        self.play(Write(text2))
+
         self.wait(2)
+        self.play(Write(text10))
+        self.wait(2)
+        self.play(Transform(text10, text1))
+        self.wait(5)
+        self.play(Transform(text10, tex1))
+        self.wait(3)
         self.play(GrowArrow(line1))
         self.wait(2)
-        self.play(Write(text3))
+        self.play(Write(text2))
         self.wait(2)
         self.play(GrowArrow(line2))
+        self.wait(2)
+        self.play(Write(text3))        
         self.wait(5)
         self.play(FadeOut(text2), FadeOut(text3), FadeOut(line1), FadeOut(line2))
         self.wait(2)
-        self.play(Transform(text1, tex2))
+        self.play(Transform(text10, tex2))
         self.wait(3)
-        self.play(FadeOut(text1))
+        self.play(FadeOut(text10))
         self.wait(3)
         self.play(FadeIn(image1), FadeIn(tex3))
         self.wait(3)
@@ -468,7 +501,7 @@ class tabulka(Scene):
 
         
         self.wait(3)
-        self.play(FadeIn(line1), FadeIn(tex1), FadeIn(tex2), FadeIn(tex3), FadeIn(tex4))
+        self.play(Write(line1), Write(tex1), Write(tex2), Write(tex3), Write(tex4))
         self.wait(5)
         self.play(
                     tex1.move_to, 3*UP+0.25*LEFT, tex1.scale, 0.8,
@@ -549,6 +582,9 @@ class newton(MovingCameraScene):
         text3 = TextMobject("Autor: Jakub Troják")
         text3.scale(1.3)
 
+        image3 = ImageMobject("night_sky")
+        image3.scale(4)
+
         self.camera_frame.save_state()
         self.wait(2)
         self.play(FadeIn(image1))
@@ -565,4 +601,9 @@ class newton(MovingCameraScene):
         self.wait(3)
         self.play(FadeOut(image2), FadeOut(text2))
         self.wait(3)
-        
+        self.play(FadeIn(image3))
+        self.wait(3)
+        self.play(image3.fade, 0.8)
+        self.wait()
+        self.play(Write(text3))
+        self.wait(10)
